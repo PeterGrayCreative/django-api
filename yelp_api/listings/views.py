@@ -6,7 +6,7 @@ import requests
 # from .forms import SubmitEmbed
 from .serializer import YelpSerializer
 
-
+# copied from a tutorial for reference, likely will all be removed
 def save_embed(request):
 	if request.method == "POST":
 		form = SubmitEmbed(request.POST)
