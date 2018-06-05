@@ -6,6 +6,9 @@ name = "pypi"
 [packages]
 django = "*"
 requests = "*"
+requests-cache = "*"
+python-decouple = "*"
+djangorestframework = "*"
 
 [dev-packages]
 "autopep8" = "*"

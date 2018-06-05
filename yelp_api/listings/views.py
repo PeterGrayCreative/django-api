@@ -1,25 +1,11 @@
-from django.shortcuts import render
-from django.conf import settings
-
-import requests
-
-# from .forms import SubmitEmbed
+from .models import Listing
+from rest_framework import viewsets
 from .serializer import YelpSerializer
 
 # copied from a tutorial for reference, likely will all be removed
-def save_embed(request):
-	if request.method == "POST":
-		form = SubmitEmbed(request.POST)
-		if form.is_valid():
-			url = form.cleaned_data['url']
-			r = requests.get('http://api.embed.ly/1/oembed?key=' +
-							 settings.EMBEDLY_KEY + '&url=' + url)
-			json = r.json()
-			serializer = EmbedSerializer(data=json)
-			if serializer.is_valid():
-				embed = serializer.save()
-				return render(request, 'embeds.html', {'embed': embed})
-	else:
-		form = SubmitEmbed()
-
-	return render(request, 'index.html', {'form': form})
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
